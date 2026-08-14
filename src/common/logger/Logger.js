@@ -1,5 +1,6 @@
 export class Logger {
   #currentLevel;
+  static #instance;
 
   constructor(level = 'info') {
     this.levels = ['debug', 'info', 'warn', 'error'];
@@ -32,8 +33,12 @@ export class Logger {
     this.log('error', message);
   }
 
-  static getInstance(level = 'error') {
-    return `Logger ${level}`;
+  static getInstance() {
+    if (!Logger.#instance) {
+      Logger.#instance = new Logger();
+    }
+
+    return Logger.#instance;
   }
 
   getCurrentLevel() {
