@@ -33,9 +33,9 @@ export class Logger {
     this.log('error', message);
   }
 
-  static getInstance() {
+  static getInstance(level = 'error') {
     if (!Logger.#instance) {
-      Logger.#instance = new Logger();
+      Logger.#instance = new Logger(level);
     }
 
     return Logger.#instance;
